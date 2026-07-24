@@ -1,0 +1,21 @@
+id,branch_id,name,email,phone,role
+1,,Sohanur Rahman,admin@juicecorner.bd,8.8017E+12,admin
+2,,Farhana Akter,farhana@juicecorner.bd,8.8017E+12,admin
+3,1,Tanvir Hossain,tanvir@juicecorner.bd,8.8017E+12,manager
+4,2,Mehedi Hasan,mehedi@juicecorner.bd,8.8017E+12,manager
+5,3,Sabrina Sultana,sabrina@juicecorner.bd,8.8017E+12,manager
+6,1,Arifur Rahman,arif@juicecorner.bd,8.8017E+12,staff
+7,1,Sumaiya Karim,sumaiya@juicecorner.bd,8.8017E+12,staff
+8,1,Rakib Uddin,rakib@juicecorner.bd,8.8017E+12,staff
+9,2,Kamrul Islam,kamrul@juicecorner.bd,8.8017E+12,staff
+10,2,Nafisa Ali,nafisa@juicecorner.bd,8.8017E+12,staff
+11,2,Zubair Ahmed,zubair@juicecorner.bd,8.8017E+12,staff
+12,3,Tashfia Khan,tashfia@juicecorner.bd,8.8017E+12,staff
+13,3,Sajid Mahmud,sajid@juicecorner.bd,8.8017E+12,staff
+14,3,Anamika Roy,anamika@juicecorner.bd,8.8017E+12,staff
+15,1,Robin Mia,robin@juicecorner.bd,8.8017E+12,delivery
+16,1,Sohel Rana,sohel@juicecorner.bd,8.8017E+12,delivery
+17,2,Limon Hossain,limon@juicecorner.bd,8.8017E+12,delivery
+18,2,Parvez Alam,parvez@juicecorner.bd,8.8017E+12,delivery
+19,3,Sharif Uddin,sharif@juicecorner.bd,8.8017E+12,delivery
+20,3,Jahangir Alam,jahangir@juicecorner.bd,8.8017E+12,delivery
