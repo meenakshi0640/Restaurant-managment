@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #dfffe8,
+                #fff4d6
+            );
+        }
+
+        .login-card {
+            max-width: 480px;
+            margin: 80px auto;
+            padding: 40px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+        }
+
+        .login-title {
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="login-card">
+
+        <div class="text-center mb-4">
+
+            <h1 class="login-title">
+                👨‍💼 Admin Login
+            </h1>
+
+            <p>
+                Juice Stall Management System
+            </p>
+
+        </div>
+
+        {% if error %}
+
+        <div class="alert alert-danger">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    class="form-control"
+                    placeholder="Enter username"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter password"
+                    required>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-success login-button">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <div class="text-center mt-4">
+
+            <a
+                href="/"
+                class="btn btn-outline-dark">
+
+                ← Back to Home
+
+            </a>
+
+        </div>
+
+        <div class="alert alert-info mt-4">
+
+            <strong>Demo login</strong><br>
+            Username: admin<br>
+            Password: admin123
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
