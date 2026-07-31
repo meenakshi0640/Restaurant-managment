@@ -49,35 +49,165 @@ def test():
     """
 
 
+
 # -------------------------------------------------
 # Branch Selection Page
 # -------------------------------------------------
-@app.route("/branches")
-def branch_selection():
 
-    branch_list = [
-        {
-            "id": 1,
-            "name": "Dhanmondi Branch",
-            "address": "House 42, Road 27, Dhanmondi, Dhaka"
-        },
-        {
-            "id": 2,
-            "name": "Gulshan Branch",
-            "address": "Plot 15, Gulshan Avenue, Gulshan-1, Dhaka"
-        },
-        {
-            "id": 3,
-            "name": "Banani Branch",
-            "address": "Road 11, Block E, Banani, Dhaka"
-        }
-    ]
+@app.route("/customer")
+def customer():
+    return render_template("customer.html")
+
+
+# -------------------------------------------
+# Search By Food
+# -------------------------------------------
+@app.route("/search-food")
+def search_food():
+
+    product_list = list(
+        products.find({}, {"_id": 0, "name": 1}).sort("name", 1)
+    )
 
     return render_template(
-        "branches.html",
+        "search_food.html",
+        products=product_list
+    )
+
+
+# -------------------------------------------
+# Search By Branch
+# -------------------------------------------
+@app.route("/search-branch")
+def search_branch():
+
+    branch_list = list(
+        branches.find({}, {"_id": 0, "name": 1}).sort("name", 1)
+    )
+
+    return render_template(
+        "search_branch.html",
         branches=branch_list
     )
 
+
+# -------------------------------------------
+# Food Search Result
+# -------------------------------------------
+@app.route("/food-result")
+def food_result():
+
+    product_name = request.args.get("product")
+
+    product = products.find_one(
+        {"name": product_name},
+        {"_id": 0}
+    )
+
+    branch_list = list(
+        branches.find(
+            {},
+            {
+                "_id": 0,
+                "name": 1
+            }
+        ).sort("name", 1)
+    )
+
+    return render_template(
+        "food_result.html",
+        product=product,
+        branches=branch_list
+    )
+
+
+
+# -------------------------------------------
+# Branch Search Result
+# -------------------------------------------
+@app.route("/branch-result")
+def branch_result():
+
+    branch = request.args.get("branch")
+
+    return f"""
+    <h2>Selected Branch :</h2>
+    <h3>{branch}</h3>
+    """
+
+cart = []
+
+@app.route("/add-to-cart", methods=["POST"])
+def add_to_cart():
+
+    product_id = int(request.form["product_id"])
+    branch = request.form["branch"]
+    quantity = int(request.form["quantity"])
+
+    product = products.find_one(
+        {"product_id": product_id},
+        {"_id": 0}
+    )
+
+    total = quantity * product["price"]
+
+    cart.append({
+
+        "branch": branch,
+        "product": product,
+        "quantity": quantity,
+        "total": total
+
+    })
+
+    return redirect(url_for("view_cart"))
+@app.route("/view-cart")
+def view_cart():
+
+    grand_total = sum(item["total"] for item in cart)
+
+    return render_template(
+
+        "cart.html",
+
+        cart=cart,
+
+        grand_total=grand_total
+
+    )
+@app.route("/order-summary")
+def order_summary():
+
+    grand_total = sum(item["total"] for item in cart)
+
+    branch = ""
+
+    if len(cart) > 0:
+        branch = cart[0]["branch"]
+
+    return render_template(
+        "order_summary.html",
+        cart=cart,
+        grand_total=grand_total,
+        branch=branch
+    )
+
+@app.route("/order-type")
+def order_type():
+    return render_template("order_type.html")
+
+@app.route("/select-order-type", methods=["POST"])
+def select_order_type():
+
+    order_type = request.form["order_type"]
+
+    if order_type == "Dine In":
+
+        return redirect(url_for("select_table"))
+
+    else:
+
+        return redirect(url_for("delivery_address"))
 
 # -------------------------------------------------
 # Customer Welcome Page
